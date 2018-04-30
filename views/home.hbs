@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/semantic-ui/semantic.min.css">
+	<style>
+		form.ui.form{
+			position: fixed;
+			left: 13%;
+			bottom: 0;
+		}
+
+		ul.sender-box{
+			float: right;
+			list-style: none;
+		}
+
+		div.sender{
+			width: 260px;
+			position: relative;
+			left: -40px;	
+		}
+
+	</style>
+</head>
+<body>
+	<div class="ui secondary menu">
+		<a href="/user/home" class="active item">
+			Home
+		</a>
+		<a href="/user/update-profile" class="item">
+			Profile
+		</a>
+		<div class="right menu">
+			<a class="ui item"> <i class="user circle icon"></i> {{user.username}} </a>
+			<a class="ui item" href="logout"> <i class="power off icon"></i>Logout</a>
+		</div>
+	</div>
+
+	{{#if accountCreated}}
+		<div class="notification container is-success">
+			<button class="delete"></button>
+			<strong>{{accountCreated}} </strong>
+		</div>
+	{{/if}}
+
+	<form class="ui form container">
+		<div class="fields">
+			<div class="twelve field wide">
+				<div class="ui action input">
+					<input type="text" name="message" placeholder="New message..." id="message">
+					<div class="ui submit button violet inverted">
+						<i class="paper plane icon"></i>
+					</div>	
+				</div>
+			</div>
+		</div>
+	</form>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{{title}}</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/bulma-0.6.2/css/bulma.css">
+	<style>
+		h1{
+			font-family: HelveticaNeue;
+			text-align: center;
+			font-size: 40px;
+			border-bottom: 4px solid whitesmoke;
+			margin-bottom: 20px;
+		}
+
+		.input{
+			box-shadow: none;
+			width: 400px;
+		}
+
+		.button{
+			position: relative;
+			left: 40%;
+			width: 400px;
+		}
+
+		.notification{
+			width: 560px;
+			position: relative;
+			top: 10px;
+		}
+	</style>
+</head>
+<body>
+	{{#if authError}}
+		<div class="notification container">
+			<button class="delete"></button>
+			<strong>{{authError}} </strong>
+		</div>
+	{{/if}}
+	
+	<div class="container">
+		<h1>Register</h1>
+		<form action="/user/signup" method="POST">
+			<div class="field is-horizontal">
+				<div class="field-label is-normal">
+					<label class="label">Name: </label>
+				</div>
+				<div class="field-body">
+					<div class="field">
+						<div class="control is-expanded">
+							<input type="text" class="input" name="firstName" placeholder="First Name">
+						</div>
+					</div>
+				</div>
+
+				<div class="field-body">
+					<div class="field">
+						<div class="control is-expanded">
+							<input type="text" class="input" name="lastName" placeholder="Last Name">
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="field is-horizontal">
+				<div class="field-label is-normal">
+					<label class="label">Username: </label>
+				</div>
+				<div class="field-body">
+					<div class="field">
+						<div class="control">
+							<input type="text" class="input" name="username" placeholder="Username">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="field is-horizontal">
+				<div class="field-label">
+					<label class="label">Password:</label>
+				</div>
+				<div class="field-body">
+					<div class="field">
+						<p class="control">
+							<input type="password" class="input" name="password" placeholder="Password">
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="field">
+				<div class="control">
+					<input type="submit" name="submit" value="Login!" class="button is-danger">
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
