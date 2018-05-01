@@ -9,30 +9,62 @@ router.get('/signup', policies.isLoggedIn, function(req, res, next) {
   res.render('signup', {title: 'User Signup'});
 });
 
-router.post('/signup', passport.authenticate('local-signup', {
-	successRedirect: '/user/home',
-	failureRedirect: '/user/signup',
-	failureFlash: true,
-	successFlash: true
-}));
+router.post('/signup', (req, res, next)=>{
+	passport.authenticate('local-signup', (err, user, info)=>{
+		if(err){
+			res.status(500).json({
+				success: false,
+				message: 'Server seems to down'
+			});
+			return;
+		}
 
-router.get('/login', policies.isLoggedIn, (req, res)=>{
-	res.render('login', {title: 'login'});
+		if(!user){
+			res.status(401).json({
+				success: false,
+				message: 'Username is taken!'
+			});
+			return;
+		}
+
+		res.status(200).json({
+			success: true,
+			user: user,
+			token: info
+		});
+
+	})(req, res, next);
 });
 
-router.post('/login', passport.authenticate('local-login', {
-	successRedirect: '/user/home',
-	failureRedirect: '/user/login',
-	failureFlash: true,
-	successFlash: true
-}));
+
+router.post('/login', (req, res, next)=>{
+	passport.authenticate('local-login', (err, user, info)=>{
+		if(err){
+			res.status(500).json({
+				success: false,
+				message: 'Server seems to down'
+			});
+			return;
+		}
+
+		if(!user){
+			res.status(401).json({
+				success: false,
+				message: 'Invalid username or password!'
+			});
+			return;
+		}
+		
+		res.status(200).json({
+			success: true,
+			user: user,
+			token: info
+		});
+	})(req, res, next);
+});
 
 router.get('/home', policies.notLoggedIn, (req, res)=>{
 	res.render('home', {title: 'home'});
 });
-
-router.get('/chat', (req, res)=>{
-	res.render('chat');
-})
 
 module.exports = router;

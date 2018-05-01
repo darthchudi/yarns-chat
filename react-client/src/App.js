@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SocketIOClient from 'socket.io-client';
 import './styles/semantic-ui/semantic.min.css';
-import {getFunName} from './helpers';
+import {getFunName} from './helpers/name-generator';
 import MessageText from './components/MessageText';
 import MenuBar from './components/MenuBar';
 import MessagesContainer from './components/MessagesContainer';

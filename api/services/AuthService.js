@@ -1,4 +1,5 @@
 var passport = require('passport'), localStrategy = require('passport-local').Strategy;
+var jwt = require('jsonwebtoken');
 var User = require('../models/User');
 
 passport.serializeUser(function(user, done){
@@ -19,22 +20,21 @@ passport.use('local-signup', new localStrategy(
 		User.findOne({username: username}, (err, user)=>{
 			if(err) return done(err);
 			if(user){
-				return done(null, false, req.flash('authError', 'That username is taken already!'));
+				return done(null, false);
 			}
 
-			var newUser = new User({
-				firstname: req.body.firstName,
-				lastname: req.body.lastName,
+			User.create({
+				firstname: req.body.firstname,
+				lastname: req.body.lastname,
 				username: req.body.username,
 				password: req.body.password
-			});
-			newUser.save((err)=>{
+			}, (err, newUser)=>{
 				if(err) return done(err);
 
-				return done(null, newUser, req.flash('accountCreated', `🎉🎉 account created  with username ${newUser.username} `));
-
-			})
-
+				var token = jwt.sign({id: newUser._id}, 'infinitywarwasmad');
+				delete newUser.password;
+				return done(null, newUser, token);
+			});
 		})
 	}
 ));
@@ -47,13 +47,16 @@ passport.use('local-login', new localStrategy(
 		User.findOne({username: username}, (err, user)=>{
 			if(err) return done(err);
 
-			if(!user) return done(null, false, req.flash("authError", "Account doesn't exist"));
+			if(!user) return done(null, false);
 
 			if(!user.comparePassword(password)){
-				done(null, false, req.flash("authError", "Invalid username or password"));
+				return done(null, false);
 			}
 
-			done(null, user);
+			delete user.password;
+
+			var token = jwt.sign({id: user._id}, 'infinitywarwasmad');
+			return done(null, user, token);
 		})
 	}
 ));

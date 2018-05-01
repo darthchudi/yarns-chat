@@ -4,15 +4,13 @@ import '../styles/sign-up.css';
 import axios from 'axios';
 import Auth from '../helpers/auth';
 
-class SignUp extends Component{
+class Login extends Component{
 	constructor(props){
 		super(props);
 		this.submit = this.submit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.state = {
 			loading: false,
-			firstname: '',
-			lastname: '',
 			username: '',
 			password: '',
 			token: '',
@@ -31,30 +29,25 @@ class SignUp extends Component{
 	submit(e){
 		e.preventDefault();
 		var data = {
-			firstname: this.state.firstname,
-			lastname: this.state.lastname,
 			username: this.state.username,
 			password: this.state.password
-		};
-		
+		}
 		this.setState({loading: true});
-
 		const auth = new Auth();
-		axios.post('/user/signup', data)
+		// axios.defaults.headers.common['x-access-token'] = token;
+
+		axios.post('/user/login', data)
 			.then((data)=>{
 				this.setState({loading: false});
 				var response = data.data;
-				var newUser = response.user;
-				auth.authenticateUser(response.token);
-				this.successMessage = `Successfully created a new account for ${newUser.username}`;
+				auth.authenticateUser(response.token)
+				console.log(`Successfully logged ${response.user.username}`);
 			})
 			.catch((e)=>{
 				console.log(e);
 			});
 
 	}
-
-
 
 	render(){
 		return (
@@ -63,19 +56,7 @@ class SignUp extends Component{
 					<i className="user plus icon"></i>
 					User Login
 				</h4>
-				<form className={`ui form signup ${this.state.loading ? 'loading' : ''}`} method="POST" action="/user/signup" onSubmit={this.submit}>
-					<div className="field">
-						<label>Name</label>
-						<div className="two fields">
-							<div className="field">
-								<input type="text" name="firstname" placeholder="First Name" onChange={this.handleChange}/>
-							</div>
-							<div className="field">
-								<input type="text" name="lastname" placeholder="Last Name" onChange={this.handleChange}/>
-							</div>
-						</div>
-					</div>
-
+				<form className={`ui form signup ${this.state.loading ? 'loading' : ''}`} method="POST" action="/user/login" onSubmit={this.submit}>
 					<div className="field">
 						<label>Username</label>
 						<input type="text" name="username" placeholder="Username" onChange={this.handleChange}/>
@@ -93,4 +74,4 @@ class SignUp extends Component{
 	}
 }
 
-export default SignUp;
+export default Login;
