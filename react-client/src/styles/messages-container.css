@@ -1,0 +1,25 @@
+ul{
+	list-style-type: none;
+	position: relative;
+	left: 15%;
+}
+
+li{
+	margin-top: 20px;
+	margin-bottom: 10px;
+	display: block;
+}
+
+.message{
+	width: 600px;
+	position: relative;
+	left: 100px;
+}
+
+.internal{
+
+}
+
+.external{
+	
+}

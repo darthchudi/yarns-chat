@@ -1,0 +1,15 @@
+form.ui.form.signup{
+	top: 50px;
+	left: 31%;
+}
+
+.ui.loading.form {
+	position: fixed;
+    cursor: default;
+    pointer-events: none;
+}
+
+input[type=submit]{
+	position: relative;
+	width: 500px;
+}

@@ -1,0 +1,10 @@
+form.ui.form{
+	position: fixed;
+	left: 13%;
+	bottom: 0;
+}
+
+a{
+	text-decoration: none;
+	color: purple;
+}

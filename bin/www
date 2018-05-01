@@ -28,8 +28,13 @@ var server = http.createServer(app);
 var io = socketIO(server);
 io.on('connection', (socket)=>{
   console.log('A new user Connected');
+
   socket.on('new message', (data)=>{
-    console.log(`${data.user} said ${data.message}`);
+    socket.broadcast.emit('new message', data);
+  });
+
+  socket.on('disconnect', ()=>{
+    console.log('A user left');
   })
 });
 
