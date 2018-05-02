@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import '../styles/semantic-ui/semantic.min.css';
 import '../styles/sign-up.css';
 import axios from 'axios';
@@ -61,7 +62,7 @@ class SignUp extends Component{
 			<div>
 				<h4 className="ui horizontal divider">
 					<i className="user plus icon"></i>
-					User Login
+					User Signup
 				</h4>
 				<form className={`ui form signup ${this.state.loading ? 'loading' : ''}`} method="POST" action="/user/signup" onSubmit={this.submit}>
 					<div className="field">
@@ -87,6 +88,7 @@ class SignUp extends Component{
 						<input type="password" name="password" placeholder="Password" onChange={this.handleChange}/>
 					</div>
 					<input type="submit" name="submit" value="Sign Up!" className="ui button big teal" onClick={this.submit}/>
+					<p>Already have an account? <Link to="/login">Login </Link> </p>
 				</form>
 			</div>
 		)

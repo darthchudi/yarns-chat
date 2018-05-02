@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 import '../styles/semantic-ui/semantic.min.css';
 import '../styles/sign-up.css';
 import axios from 'axios';
@@ -27,7 +28,7 @@ class Login extends Component{
 	}
 
 	submit(e){
-		e.preventDefault();
+		e.preventDefault(); 
 		var data = {
 			username: this.state.username,
 			password: this.state.password
@@ -68,6 +69,7 @@ class Login extends Component{
 						<input type="password" name="password" placeholder="Password" onChange={this.handleChange}/>
 					</div>
 					<input type="submit" name="submit" value="Sign Up!" className="ui button big teal" onClick={this.submit}/>
+					<p>Don't have an account? <Link to="/signup">Sign Up </Link> </p>
 				</form>
 			</div>
 		)
