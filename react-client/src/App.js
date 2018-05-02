@@ -16,8 +16,7 @@ class App extends Component {
 		super(props);
 		this.updateMessages = this.updateMessages.bind(this);
 		this.recieveMessage = this.recieveMessage.bind(this);
-		this.userJoined = this.userJoined.bind(this);
-		this.userLeft = this.userLeft.bind(this);
+		this.handleNotification = this.handleNotification.bind(this);
 		this.logout = this.logout.bind(this);
 		this.state = {
 			messages: [],
@@ -40,8 +39,8 @@ class App extends Component {
 				this.setState({client: client});
 				this.setState({loaded: true});
 				this.state.client.on('new message', this.recieveMessage);
-				this.state.client.on('user joined', this.userJoined);
-				this.state.client.on('user left', this.userLeft);
+				this.state.client.on('user joined', this.handleNotification);
+				this.state.client.on('user left', this.handleNotification);
 			})
 			.catch((e)=>{
 				console.log(e);
@@ -74,24 +73,21 @@ class App extends Component {
 		this.setState({isAuthenticated: false});
 	}
 
-	userJoined(user){
+	handleNotification(notification){
 		var notifications = this.state.notifications;
-		notifications.push({
-			event: 'join',
-			message: `${user} just joined!`
-		});
-		this.setState({notifications});
-		console.log(user +" just joined");
-	}
+		if(notification.event=='join'){
+			notifications.push(`${notification.user} just joined!`);
+		}
 
-	userLeft(user){
-		var notifications = this.state.notifications;
-		notifications.push({
-			event: 'leave',
-			message: `${user} just left!`
-		});
+		if(notification.event=='leave'){
+			notifications.push(`${notification.user} just left!`);
+		}
+
 		this.setState({notifications});
-		console.log(user + " just left");
+		setTimeout(()=>{
+			notifications.pop();
+			this.setState({notifications});
+		}, 1000);
 	}
 
 	render() {

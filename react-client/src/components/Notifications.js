@@ -6,7 +6,7 @@ const notifications = (props)=>(
 			<li key={key}>
 				<div className="ui message compact info notification">
 				  <div className="header">
-				    {notification.message}
+				    {notification}
 				  </div>
 				</div>
 			</li>
