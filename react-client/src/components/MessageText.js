@@ -18,7 +18,7 @@ class MessageText extends Component{
 	sendMessage(e){
 		e.preventDefault();
 		var message = {
-			sender: this.props.sender,
+			sender: this.props.user,
 			content: this.state.message,
 			source: 'internal'
 		}

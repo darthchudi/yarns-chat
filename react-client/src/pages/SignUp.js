@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import '../styles/semantic-ui/semantic.min.css';
 import '../styles/sign-up.css';
 import axios from 'axios';
 import Auth from '../helpers/auth';
+const auth = new Auth();
 
 class SignUp extends Component{
 	constructor(props){
@@ -26,7 +27,7 @@ class SignUp extends Component{
 	}
 
 	componentDidMount(){
-		// console.log(localStorage.getItem('rice'));
+		
 	}
 
 	submit(e){
@@ -40,24 +41,26 @@ class SignUp extends Component{
 		
 		this.setState({loading: true});
 
-		const auth = new Auth();
 		axios.post('/user/signup', data)
 			.then((data)=>{
-				this.setState({loading: false});
 				var response = data.data;
 				var newUser = response.user;
 				auth.authenticateUser(response.token);
 				this.successMessage = `Successfully created a new account for ${newUser.username}`;
+				this.setState({loading: false});
 			})
 			.catch((e)=>{
 				console.log(e);
 			});
-
 	}
 
 
 
 	render(){
+		if(auth.isUserAuthenticated()){
+			return <Redirect to="/" />
+		}
+
 		return (
 			<div>
 				<h4 className="ui horizontal divider">

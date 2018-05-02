@@ -2,12 +2,7 @@ var express = require('express');
 var router = express.Router();
 var userController = require('../api/controllers/UserController');
 var asyncHandler = require('../api/services/AsyncHandler');
-var policies = require('../api/services/Policies');
 var passport = require('../api/services/AuthService');
-
-router.get('/signup', policies.isLoggedIn, function(req, res, next) {
-  res.render('signup', {title: 'User Signup'});
-});
 
 router.post('/signup', (req, res, next)=>{
 	passport.authenticate('local-signup', (err, user, info)=>{
@@ -63,8 +58,7 @@ router.post('/login', (req, res, next)=>{
 	})(req, res, next);
 });
 
-router.get('/home', policies.notLoggedIn, (req, res)=>{
-	res.render('home', {title: 'home'});
-});
+router.get('/get', userController.getUser);
+
 
 module.exports = router;

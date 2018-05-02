@@ -11,9 +11,7 @@ class MessagesContainer extends Component{
 						this.props.messages.map((message)=>
 							<Message message={message} key={counter+=1} />
 						)
-
 					}
-
 				</ul>
 
 		)

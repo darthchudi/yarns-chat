@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import '../styles/semantic-ui/semantic.min.css';
 import '../styles/sign-up.css';
 import axios from 'axios';
 import Auth from '../helpers/auth';
+const auth = new Auth();
 
 class Login extends Component{
 	constructor(props){
@@ -24,7 +25,7 @@ class Login extends Component{
 	}
 
 	componentDidMount(){
-		// console.log(localStorage.getItem('rice'));
+
 	}
 
 	submit(e){
@@ -34,15 +35,14 @@ class Login extends Component{
 			password: this.state.password
 		}
 		this.setState({loading: true});
-		const auth = new Auth();
 		// axios.defaults.headers.common['x-access-token'] = token;
 
 		axios.post('/user/login', data)
 			.then((data)=>{
-				this.setState({loading: false});
 				var response = data.data;
 				auth.authenticateUser(response.token)
 				console.log(`Successfully logged ${response.user.username}`);
+				this.setState({loading: false});
 			})
 			.catch((e)=>{
 				console.log(e);
@@ -51,6 +51,10 @@ class Login extends Component{
 	}
 
 	render(){
+		if(auth.isUserAuthenticated()){
+			return <Redirect to="/" />
+		}
+
 		return (
 			<div>
 				<h4 className="ui horizontal divider">

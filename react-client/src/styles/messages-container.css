@@ -16,6 +16,11 @@ li{
 	left: 100px;
 }
 
+
+span.username{
+	padding-bottom: 5px;
+	border-bottom: 4px solid black;
+}
 .internal{
 
 }
