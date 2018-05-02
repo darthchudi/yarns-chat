@@ -23,18 +23,22 @@ app.set('port', port);
 var server = http.createServer(app);
 
 /**
-  *Create socket
+  *Create and manage sockets
 **/
 var io = socketIO(server);
 io.on('connection', (socket)=>{
-  console.log('A new user Connected');
+  var user = socket.handshake.query.username;
+ 
+  socket.broadcast.emit('user joined', user);
+  console.log(`${user} just joined`);
 
   socket.on('new message', (data)=>{
     socket.broadcast.emit('new message', data);
   });
 
   socket.on('disconnect', ()=>{
-    console.log('A user left');
+    socket.broadcast.emit('user left', user);
+    console.log(`${user} just left`);
   })
 });
 

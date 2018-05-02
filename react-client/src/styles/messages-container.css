@@ -21,6 +21,13 @@ span.username{
 	padding-bottom: 5px;
 	border-bottom: 4px solid black;
 }
+
+.notification{
+	position: fixed;
+	left: 900px;
+	width: 200px;
+}
+
 .internal{
 
 }
