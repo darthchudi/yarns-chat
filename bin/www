@@ -8,6 +8,7 @@ var app = require('../app');
 var debug = require('debug')('node-react-chat:server');
 var http = require('http');
 var socketIO = require('socket.io');
+var User = require('../api/models/User');
 
 /**
  * Get port from environment and store in Express.
@@ -26,24 +27,36 @@ var server = http.createServer(app);
   *Create and manage sockets
 **/
 var io = socketIO(server);
-io.on('connection', (socket)=>{
+io.on('connection', async (socket)=>{
   var user = socket.handshake.query.username;
-  console.log(`${user} just joined`);
+  var onlineUsers = [];
+
+  //Find the newly joined user, update his online status to true and find all online users
+  await User.findOneAndUpdate({username: user}, {online: true});
+  onlineUsers = await User.find({online: true}, 'username');
+  onlineUsers = onlineUsers.map(user=>user.username);
   
   socket.broadcast.emit('user joined', {
 	event: 'join',
-	user: user
+	user: user,
+	onlineUsers: onlineUsers
   });
   
   socket.on('new message', (data)=>{
 	socket.broadcast.emit('new message', data);
   });
 
-  socket.on('disconnect', ()=>{
-	console.log(`${user} just left`);
+  socket.on('disconnect', async ()=>{
+
+  	//Find the user that just left, update his online status to false and find all online users
+	await User.findOneAndUpdate({username: user}, {online: false});
+	onlineUsers = await User.find({online: true}, 'username');
+	onlineUsers = onlineUsers.map(user=>user.username);
+
 	socket.broadcast.emit('user left', {
 		event: 'leave',
-		user: user
+		user: user,
+		onlineUsers: onlineUsers
 	});
   });
 

@@ -6,7 +6,7 @@ class MessagesContainer extends Component{
 	render(){
 		var counter = 0;
 		return(
-				<ul>
+				<ul className="message-list">
 					{
 						this.props.messages.map((message)=>
 							<Message message={message} key={counter+=1} />

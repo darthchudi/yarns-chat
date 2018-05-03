@@ -1,10 +1,10 @@
-ul{
+ul.message-list{
 	list-style-type: none;
 	position: relative;
 	left: 15%;
 }
 
-li{
+li.message-list-item{
 	margin-top: 20px;
 	margin-bottom: 10px;
 	display: block;
@@ -13,7 +13,7 @@ li{
 .message{
 	width: 600px;
 	position: relative;
-	left: 100px;
+	left: -80px;
 }
 
 
@@ -24,7 +24,7 @@ span.username{
 
 .notification{
 	position: fixed;
-	left: 900px;
+	left: -200px;
 	width: 200px;
 }
 

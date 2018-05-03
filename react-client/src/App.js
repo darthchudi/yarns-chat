@@ -8,6 +8,7 @@ import MessageText from './components/MessageText';
 import MenuBar from './components/MenuBar';
 import Notifications from './components/Notifications';
 import MessagesContainer from './components/MessagesContainer';
+import OnlineUsers from './components/OnlineUsers';
 import Auth from './helpers/auth';
 const auth = new Auth();
 
@@ -25,7 +26,8 @@ class App extends Component {
 			isAuthenticated: true,
 			user: {},
 			loaded: false,
-			notifications: []
+			notifications: [],
+			onlineUsers: []
 		}
 	}
 
@@ -49,9 +51,9 @@ class App extends Component {
 
 	updateMessages(message){
 		this.state.client.emit('new message', {
-				content: message.content,
-				sender: message.sender,
-				source: 'external'
+			content: message.content,
+			sender: message.sender,
+			source: 'external'
 		});
 
 		var messages = this.state.messages;
@@ -74,18 +76,25 @@ class App extends Component {
 	}
 
 	handleNotification(notification){
+
+		var onlineUsers = notification.onlineUsers;
+		var index = onlineUsers.indexOf(this.state.user.username);
+		onlineUsers.splice(index, 1);
+		this.setState({onlineUsers});
+
+
 		var notifications = this.state.notifications;
-		if(notification.event=='join'){
+		if(notification.event==='join'){
 			notifications.push(`${notification.user} just joined!`);
 		}
 
-		if(notification.event=='leave'){
+		if(notification.event==='leave'){
 			notifications.push(`${notification.user} just left!`);
 		}
 
 		this.setState({notifications});
 		setTimeout(()=>{
-			notifications.pop();
+			notifications.shift();
 			this.setState({notifications});
 		}, 1000);
 	}
@@ -103,9 +112,22 @@ class App extends Component {
 			return (
 				<div>
 					<MenuBar logout={this.logout} username={this.state.user.username}/>
-					<MessagesContainer messages={this.state.messages}/>
-					{this.state.notifications ? <Notifications notifications={this.state.notifications} /> : ''}
-					<MessageText updateMessages={this.updateMessages} user={this.state.user.username}/>
+					<div className="ui grid"> 
+						<div className="three wide column">
+							<OnlineUsers onlineUsers={this.state.onlineUsers} />
+						</div>
+
+						<div className="eleven wide column">
+							<MessagesContainer messages={this.state.messages}/>
+							<MessageText updateMessages={this.updateMessages} user={this.state.user.username}/>
+						</div>
+
+						<div className="two wide column">
+							{this.state.notifications ? <Notifications notifications={this.state.notifications} /> : ''}
+
+						</div>
+
+					</div>
 				</div>
 			)
 		}

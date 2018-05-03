@@ -11,6 +11,10 @@ const userSchema = new Schema({
 		lowercase: true,
 		trim: true
 	},
+	online: {
+		type: Boolean,
+		default: false
+	},
 	password: String
 });
 

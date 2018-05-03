@@ -5,7 +5,7 @@ class Message extends Component{
 	render(){
 		var messageClass = this.props.message.source==='internal' ? 'black internal' : 'external';
 		return (
-			<li>
+			<li className="message-list-item">
 				<div className={`ui floating message compact ${messageClass}`}>
 					<div className="header">
 						{this.props.message.sender}
