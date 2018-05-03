@@ -12,7 +12,7 @@ module.exports = {
 		}
 
 		jwt.verify(token, 'infinitywarwasmad', (err, decoded)=>{
-			User.findById(decoded.id, (err, user)=>{
+			User.findById(decoded.id, async (err, user)=>{
 				if(err){
 					return res.status(500).json({
 						success: false,

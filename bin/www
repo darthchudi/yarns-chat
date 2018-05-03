@@ -35,6 +35,8 @@ io.on('connection', async (socket)=>{
   await User.findOneAndUpdate({username: user}, {online: true});
   onlineUsers = await User.find({online: true}, 'username');
   onlineUsers = onlineUsers.map(user=>user.username);
+
+  socket.emit('get online users', onlineUsers);
   
   socket.broadcast.emit('user joined', {
 	event: 'join',

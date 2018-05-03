@@ -43,6 +43,13 @@ class App extends Component {
 				this.state.client.on('new message', this.recieveMessage);
 				this.state.client.on('user joined', this.handleNotification);
 				this.state.client.on('user left', this.handleNotification);
+
+				this.state.client.on('get online users', (users)=>{
+					var onlineUsers = users;
+					var index = onlineUsers.indexOf(this.state.user.username);
+					onlineUsers.splice(index, 1);
+					this.setState({onlineUsers});
+				});
 			})
 			.catch((e)=>{
 				console.log(e);
@@ -76,12 +83,10 @@ class App extends Component {
 	}
 
 	handleNotification(notification){
-
 		var onlineUsers = notification.onlineUsers;
 		var index = onlineUsers.indexOf(this.state.user.username);
 		onlineUsers.splice(index, 1);
 		this.setState({onlineUsers});
-
 
 		var notifications = this.state.notifications;
 		if(notification.event==='join'){
