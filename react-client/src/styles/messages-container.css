@@ -11,7 +11,7 @@ li.message-list-item{
 }
 
 .message{
-	width: 600px;
+	width: 70%;
 	position: relative;
 	left: -80px;
 }
