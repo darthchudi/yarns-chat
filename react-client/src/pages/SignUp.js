@@ -61,7 +61,7 @@ class SignUp extends Component{
 
 		return (
 			<div>
-				<h1 className="yarn-icon display3">🗣️ yarns.</h1>
+				<h1 className="yarn-icon display3"> <span role="img" aria-label="icon">🗣️</span> yarns.</h1>
 				<div className="container">
 					<div className="row">
 						<div className="col">
@@ -71,19 +71,19 @@ class SignUp extends Component{
 
 									<div className="form-row pt-3" id="names">
 										<div className="col col-sm-6 form-group">
-											<label for="firstname">First Name</label>
+											<label htmlFor="firstname">First Name</label>
 											<input type="text" className="form-control" placeholder="First Name" id="firstname" required name="firstname" onChange={this.handleChange}/> 
 										</div>
 
 										<div className="col col-sm-6 form-group">
-											<label for="lastname">Last Name</label>
+											<label htmlFor="lastname">Last Name</label>
 											<input type="text" className="form-control" placeholder="Last Name" id="lastname" required name="lastname" onChange={this.handleChange}/>
 										</div>
 									</div>
 
 									<div className="form-row">
 										<div className="col form-group">
-											<label for="username">Username</label>
+											<label htmlFor="username">Username</label>
 											<div className="input-group">
 												<div className="input-group-prepend">
 													<span className="input-group-text" id="inputGroupPrepend">@</span>
@@ -96,7 +96,7 @@ class SignUp extends Component{
 									<div className="form-row">
 										<div className="col form-group">
 											<div className="form-group">
-												<label for="username">Password</label>
+												<label htmlFor="username">Password</label>
 												<input type="password" className="form-control" placeholder="Password" required name="password" onChange={this.handleChange} />
 												<small className="form-text">
 													Your password may be 4-20 characters long
@@ -124,7 +124,7 @@ class SignUp extends Component{
 					<div className="col">
 						<div className="with-love pt-3 fixed-bottom">
 							<p className="align-middle">
-								Made with 💛 and ☕ by  <a href="https://github.com/darthchudi" className="github"> Chudi. </a>
+								Made with  <span role="img" aria-label="icon">💛 and ☕ by </span> <a href="https://github.com/darthchudi" className="github"> Chudi. </a>
 							</p>
 						</div>
 					</div>

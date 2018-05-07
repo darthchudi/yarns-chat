@@ -55,24 +55,59 @@ class Login extends Component{
 
 		return (
 			<div>
-				<h4 className="ui horizontal divider">
-					<i className="user plus icon"></i>
-					User Login
-				</h4>
-				<form className={`ui form signup ${this.state.loading ? 'loading' : ''}`} method="POST" action="/user/login" onSubmit={this.submit}>
-					<div className="field">
-						<label>Username</label>
-						<input type="text" name="username" placeholder="Username" onChange={this.handleChange}/>
+				<h1 className="yarn-icon display3"> <span role="img" aria-label="icon">🗣️</span> yarns.</h1>
+				<div className="container">
+					<div className="row">
+						<div className="col">
+							<div className="d-flex justify-content-center form-box p-3 mt-2">
+								<form onSubmit={this.submit}>
+									<h1 className="mx-auto display2">Login</h1>
+
+									<div className="form-row">
+										<div className="col form-group">
+											<label htmlFor="username">Username</label>
+											<div className="input-group">
+												<div className="input-group-prepend">
+													<span className="input-group-text" id="inputGroupPrepend">@</span>
+												</div>
+												<input type="text" className="form-control" placeholder="Username" id="username" aria-describedby="inputGroupPrepend" name="username" onChange={this.handleChange} required/>
+											</div>
+										</div>	
+									</div>
+
+									<div className="form-row">
+										<div className="col form-group">
+											<div className="form-group">
+												<label htmlFor="username">Password</label>
+												<input type="password" className="form-control" placeholder="Password" name="password" onChange={this.handleChange}  required/>
+											</div>
+										</div>	
+									</div>
+
+									<div className="form-row">
+										<div className="col">
+											<input type="submit" className="btn btn-purple w-100" value="Login!" onClick={this.submit} />
+										</div>
+									</div>
+									<small className="form-text prompt pt-2">
+										Don't have a yarns account? <span className="yarns"><Link to="/signup">Sign Up </Link></span>
+									</small>
+								</form>
+							</div>
+						</div>
 					</div>
 
+				</div>
 
-					<div className="field">
-						<label>password</label>
-						<input type="password" name="password" placeholder="Password" onChange={this.handleChange}/>
+				<div className="row">
+					<div className="col">
+						<div className="with-love pt-3 fixed-bottom">
+							<p className="align-middle">
+								Made with  <span role="img" aria-label="icon">💛 and ☕ by </span> <a href="https://github.com/darthchudi" className="github"> Chudi. </a>
+							</p>
+						</div>
 					</div>
-					<input type="submit" name="submit" value="Sign Up!" className="ui button big teal" onClick={this.submit}/>
-					<p>Don't have an account? <Link to="/signup">Sign Up </Link> </p>
-				</form>
+				</div>
 			</div>
 		)
 	}
