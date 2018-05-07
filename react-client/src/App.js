@@ -117,26 +117,24 @@ class App extends Component {
 			return (
 				<div>
 					<MenuBar logout={this.logout} username={this.state.user.username}/>
-					<div className="ui grid"> 
-						<div className="row">
-							<div className="three wide column">
-								<OnlineUsers onlineUsers={this.state.onlineUsers} />
-							</div>
 
-							<div className="eleven wide column">
+					<main className="mt-3">
+
+						<div className="row">
+							<div className="col-sm-8 col-md-10" id="messages">
 								<MessagesContainer messages={this.state.messages}/>
 							</div>
 
-							<div className="two wide column">
+							<div className="col-sm-4 col-md-2" id="notifications">
 								{this.state.notifications ? <Notifications notifications={this.state.notifications} /> : ''}
 							</div>
 						</div>
 
-						<div className="row">
+						<div className="row fixed-bottom message-input-box">
 							<MessageText updateMessages={this.updateMessages} user={this.state.user.username}/>
 						</div>
 
-					</div>
+					</main>
 				</div>
 			)
 		}

@@ -3,16 +3,14 @@ import Message from './Message';
 
 class MessagesContainer extends Component{
 	render(){
-		var counter = 0;
 		return(
-				<ul className="message-list">
-					{
-						this.props.messages.map((message)=>
-							<Message message={message} key={counter+=1} />
-						)
-					}
-				</ul>
-
+			<div className="container-fluid ml-4 ml-md-5">
+				{
+					this.props.messages.map((message, key)=>
+						<Message message={message} key={key} />
+					)
+				}
+			</div>
 		)
 	}
 }

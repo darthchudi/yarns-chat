@@ -26,16 +26,21 @@ class MessageText extends Component{
 	}
 
 	render(){
-		return( 
-			<div>
-				<form className="ui form container" onSubmit={this.sendMessage}>
-					<div className="ui fluid action input">
-						<input type="text" name="message" placeholder="New message..." onChange={this.handleChange} value={this.state.message}/>
-						<button className="ui icon button" onClick={this.sendMessage}>
-							<i className="paper plane icon"></i>
-						</button>
-					</div>			
-				</form>
+		return(
+			<div className="col pt-3">
+				<div className="container">
+					<form onSubmit={this.sendMessage}>
+						<div className="form-row mb-2">
+							<div className="col-sm-8 col-md-10 mb-2">
+								<input type="text" className="form-control" placeholder="New Message..." name="message" onChange={this.handleChange} value={this.state.message} />
+							</div>
+
+							<div className="col-sm-2 col-md-2">
+								<input type="submit" className="btn btn-purple round" value="send message 🚀" onClick={this.sendMessage}/>
+							</div>
+						</div>
+					</form>
+				</div>
 			</div>
 		)
 	}

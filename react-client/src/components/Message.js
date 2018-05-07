@@ -3,18 +3,20 @@ import React, {Component} from 'react';
 
 class Message extends Component{
 	render(){
-		var messageClass = this.props.message.source==='internal' ? 'black internal' : 'external';
+		var messageClass = this.props.message.source==='internal' ? 'bg-white' : 'text-white bg-dark';
 		return (
-			<li className="message-list-item">
-				<div className={`ui floating message compact ${messageClass}`}>
-					<div className="header">
-						{this.props.message.sender}
+			<div className="row">
+				<div className="col">
+					<div className={`card w-75 mx-md-auto my-3 ${messageClass}`}>
+						<div className="card-body">
+							<h5 className="card-title">{this.props.message.sender}</h5>
+							<p className="card-text">
+								{this.props.message.content} 
+							</p>
+						</div>
 					</div>
-					{this.props.message.content} 
 				</div>
-
-			</li>
-
+			</div>
 		)
 	}
 }

@@ -1,20 +1,17 @@
 import React from 'react';
 
 const notifications = (props)=>(
-	<ul>
+	<div className="container">
 		{props.notifications.map((notification, key)=>(
-			<li key={key}>
-				<div className="ui message compact info notification">
-				  <div className="header">
-				    {notification}
-				  </div>
+			<div className="row" key={key}>
+				<div className="col">
+					<div className="alert alert-info w-75 mx-auto">
+						{notification}
+					</div>
 				</div>
-			</li>
+			</div>
 		))}
-
-	</ul>
-
-
+	</div>
 )
 
 export default notifications;
