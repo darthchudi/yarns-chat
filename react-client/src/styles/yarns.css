@@ -1,0 +1,60 @@
+/* Sign Up Page Styles */
+body{
+	overflow-x: hidden;
+	padding-bottom: 120px;
+}
+
+
+.btn-purple{
+	background-color: #563d7c;
+	color: white;
+}
+
+h1{
+	text-align: center;
+	padding-bottom: 4px;
+	border-bottom: 6px solid whitesmoke;
+}
+
+h1.yarn-icon{
+	border-bottom: none;
+}
+.form-box{
+	box-shadow: 0 0 0 1px rgba(34,36,38,.22) inset,0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.15);
+}
+
+.prompt{
+	font-size: 15px;
+	text-align: center;
+}
+
+.yarns a{
+	color: black;
+	border-bottom: 4px solid #563d7c;
+	padding-bottom: 1px;
+}
+
+a:hover{
+	text-decoration: none;
+	border-bottom: 4px solid whitesmoke;
+}
+
+.with-love{
+	box-shadow: 0 0 0 1px rgba(34,36,38,.22) inset,0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.15);
+	background-color: white;
+	color: black;
+	text-align: center;
+}
+
+a.github{
+	color: black;
+	border-bottom: 5px solid #563d7c;
+}
+
+a.github:hover{
+	border-bottom: 5px solid white;
+	transition: 0.4s ease-in-out;
+}
+
+
+/* END */

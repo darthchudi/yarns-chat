@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import '../styles/message-text.css';
 
 class MessageText extends Component{
 	constructor(props){

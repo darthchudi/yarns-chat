@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Message from './Message';
-import '../styles/messages-container.css';
 
 class MessagesContainer extends Component{
 	render(){

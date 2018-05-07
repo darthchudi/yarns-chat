@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {Redirect} from 'react-router-dom';
-import SocketIOClient from 'socket.io-client';
-import './styles/semantic-ui/semantic.min.css';
+import SocketIOClient from 'socket.io-client';	
 import {getFunName} from './helpers/name-generator';
 import MessageText from './components/MessageText';
 import MenuBar from './components/MenuBar';
@@ -81,8 +80,9 @@ class App extends Component {
 		this.state.client.disconnect();
 		this.setState({isAuthenticated: false});
 	}
-
+	
 	handleNotification(notification){
+
 		var onlineUsers = notification.onlineUsers;
 		var index = onlineUsers.indexOf(this.state.user.username);
 		onlineUsers.splice(index, 1);

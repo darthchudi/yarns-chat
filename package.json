@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon --ignore /react-client ./bin/www"
+   
   },
   "dependencies": {
     "bcrypt": "^2.0.1",

@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import '../styles/semantic-ui/semantic.min.css';
-import '../styles/sign-up.css';
 import axios from 'axios';
 import Auth from '../helpers/auth';
 const auth = new Auth();

@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {Link, Redirect} from 'react-router-dom';
-import '../styles/semantic-ui/semantic.min.css';
-import '../styles/sign-up.css';
 import axios from 'axios';
 import Auth from '../helpers/auth';
 const auth = new Auth();
@@ -63,37 +61,75 @@ class SignUp extends Component{
 
 		return (
 			<div>
-				<h4 className="ui horizontal divider">
-					<i className="user plus icon"></i>
-					User Signup
-				</h4>
-				<form className={`ui form signup ${this.state.loading ? 'loading' : ''}`} method="POST" action="/user/signup" onSubmit={this.submit}>
-					<div className="field">
-						<label>Name</label>
-						<div className="two fields">
-							<div className="field">
-								<input type="text" name="firstname" placeholder="First Name" onChange={this.handleChange}/>
-							</div>
-							<div className="field">
-								<input type="text" name="lastname" placeholder="Last Name" onChange={this.handleChange}/>
+				<h1 className="yarn-icon display3">🗣️ yarns.</h1>
+				<div className="container">
+					<div className="row">
+						<div className="col">
+							<div className="d-flex justify-content-center form-box p-3 mt-md-2">
+								<form method="POST" onSubmit={this.submit}>
+									<h1 className="mx-auto display2">Sign Up</h1>
+
+									<div className="form-row pt-3" id="names">
+										<div className="col col-sm-6 form-group">
+											<label for="firstname">First Name</label>
+											<input type="text" className="form-control" placeholder="First Name" id="firstname" required name="firstname" onChange={this.handleChange}/> 
+										</div>
+
+										<div className="col col-sm-6 form-group">
+											<label for="lastname">Last Name</label>
+											<input type="text" className="form-control" placeholder="Last Name" id="lastname" required name="lastname" onChange={this.handleChange}/>
+										</div>
+									</div>
+
+									<div className="form-row">
+										<div className="col form-group">
+											<label for="username">Username</label>
+											<div className="input-group">
+												<div className="input-group-prepend">
+													<span className="input-group-text" id="inputGroupPrepend">@</span>
+												</div>
+												<input type="text" className="form-control" placeholder="Username" id="username" aria-describedby="inputGroupPrepend" required name="username" onChange={this.handleChange}/>
+											</div>
+										</div>	
+									</div>
+
+									<div className="form-row">
+										<div className="col form-group">
+											<div className="form-group">
+												<label for="username">Password</label>
+												<input type="password" className="form-control" placeholder="Password" required name="password" onChange={this.handleChange} />
+												<small className="form-text">
+													Your password may be 4-20 characters long
+												</small>
+											</div>
+										</div>	
+									</div>
+
+									<div className="form-row">
+										<div className="col">
+											<input type="submit" className="btn btn-purple w-100" value="Sign Up!" onClick={this.submit}/>
+										</div>
+									</div>
+									<small className="form-text prompt pt-2">
+										Already have a Yarns account? <span className="yarns"><Link to="/login">Login</Link></span>
+									</small>
+								</form>
 							</div>
 						</div>
 					</div>
 
-					<div className="field">
-						<label>Username</label>
-						<input type="text" name="username" placeholder="Username" onChange={this.handleChange}/>
-					</div>
+				</div>
 
-
-					<div className="field">
-						<label>password</label>
-						<input type="password" name="password" placeholder="Password" onChange={this.handleChange}/>
+				<div className="row">
+					<div className="col">
+						<div className="with-love pt-3 fixed-bottom">
+							<p className="align-middle">
+								Made with 💛 and ☕ by  <a href="https://github.com/darthchudi" className="github"> Chudi. </a>
+							</p>
+						</div>
 					</div>
-					<input type="submit" name="submit" value="Sign Up!" className="ui button big teal" onClick={this.submit}/>
-					<p>Already have an account? <Link to="/login">Login </Link> </p>
-				</form>
-			</div>
+				</div>
+			</div>			
 		)
 	}
 }

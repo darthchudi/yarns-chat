@@ -6,9 +6,7 @@ var mongoose = require('mongoose');
 var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('./api/services/AuthService');
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/UserRouter');
+var router = require('./routes/router');
 
 var app = express();
 
@@ -50,8 +48,10 @@ app.use(function(req, res, next){
 });
 
 //Mount Routes
-app.use('/', indexRouter);
-app.use('/user', usersRouter);
+app.use('/user', router);
+app.use('*', (req, res)=>{
+	res.sendFile(path.join(__dirname, 'react-client/public/index.html'));
+})
 
 
 // catch 404 errors and forward to error handler
