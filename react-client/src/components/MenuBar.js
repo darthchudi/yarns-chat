@@ -1,17 +1,58 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 const menuBar =  (props) => (
-	<div className="ui secondary menu">
-		<a href="/user/home" className="active item">
-			Home
-		</a>
-		<a href="/user/update-profile" className="item">
-			Profile
-		</a>
-		<div className="right menu">
-			<a className="ui item"><i className="user circle icon"></i> Logged In as: <span className="username"> {props.username} </span> </a>
-			<a className="ui item" href="logout" onClick={props.logout}> <i className="power off icon"></i>Logout</a>
-		</div>
-	</div>
+	<nav className="navbar navbar-expand-md navbar-light bg-light">
+		<Link to="/" className="navbar-brand"> <span role="img" aria-labelledby="icon"> 🗣️ yarns. </span>  </Link>
+		<button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle Navigation">
+			<span className="navbar-toggler-icon"></span>
+		</button>
+
+		<div className="collapse navbar-collapse" id="navbarCollapse">
+			<ul className="navbar-nav mr-auto">
+				<li className="nav-item active">
+					<Link to="/" className="nav-link">Home</Link> 
+				</li>
+
+				<li className="nav-item">
+					<Link to="/" className="nav-link">Profile</Link>
+				</li>
+
+				<li className="nav-item">
+					<Link to="/" className="nav-link">About</Link>
+				</li>
+
+				<li className="nav-item dropdown">
+					<a className="btn text-black btn-outline-info btn-sm dropdown-toggle ml-md-3 mt-md-1" data-toggle="dropdown" aria-haspopup="true" role="button" id="#onlineUsersDropdown" aria-expanded="false"> 
+						4 other online users 
+					</a>
+					<div className="dropdown-menu ml-md-3" aria-labelledby="onlineUsersDropdown">
+						<span href="" className="dropdown-item d-flex justify-content-between align-items-center">
+							Chudi
+							<span className="badge badge-success badge-pill">online</span>
+						</span>
+						<span href="" className="dropdown-item d-flex justify-content-between align-items-center">
+							Frank
+							<span className="badge badge-success badge-pill">online</span>
+						</span>
+						<span href="" className="dropdown-item d-flex justify-content-between align-items-center">
+							Tony
+							<span className="badge badge-success badge-pill">online</span>
+						</span>
+					</div>
+				</li>
+			</ul>
+
+			<ul className="navbar-nav ml-auto">
+				<li className="navbar-item">
+					<form action="" className="form-inline">
+						<button className="btn btn-outline-dark mr-4 my-2" type="button">Signed In As: {props.username}</button>
+						<button className="btn btn-outline-danger my-2 m" type="button" onClick={props.logout}>Logout</button>
+					</form>
+				</li>
+			</ul>
+		</div>	
+	</nav>
 )
 
 export default menuBar;
