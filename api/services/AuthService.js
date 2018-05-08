@@ -1,6 +1,7 @@
 var passport = require('passport'), localStrategy = require('passport-local').Strategy;
 var jwt = require('jsonwebtoken');
 var User = require('../models/User');
+require('dotenv').config();
 
 passport.serializeUser(function(user, done){
 	done(null, user.id);
@@ -31,7 +32,7 @@ passport.use('local-signup', new localStrategy(
 			}, (err, newUser)=>{
 				if(err) return done(err);
 
-				var token = jwt.sign({id: newUser._id}, 'infinitywarwasmad');
+				var token = jwt.sign({id: newUser._id}, process.env.TOKEN_SECRET);
 				delete newUser.password;
 				return done(null, newUser, token);
 			});
@@ -55,7 +56,7 @@ passport.use('local-login', new localStrategy(
 
 			delete user.password;
 
-			var token = jwt.sign({id: user._id}, 'infinitywarwasmad');
+			var token = jwt.sign({id: user._id}, process.env.TOKEN_SECRET);
 			return done(null, user, token);
 		})
 	}

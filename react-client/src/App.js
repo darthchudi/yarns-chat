@@ -32,11 +32,12 @@ class App extends Component {
 
 	componentDidMount(){
 		axios.defaults.headers.common['x-access-token'] = auth.getToken();
-		axios.get('/user/get')
+		axios.get('/api/get')
 			.then((data)=>{
 				var response = data.data;
 				this.setState({user: response.user});
-				var client = SocketIOClient(`http://localhost:3001?username=${this.state.user.username}`);
+				// var client = SocketIOClient(`http://localhost:3001?username=${this.state.user.username}`);
+				var client = SocketIOClient(`https://yarns-chat.herokuapp.com/?username=${this.state.user.username}`);
 				this.setState({client: client});
 				this.setState({loaded: true});
 				this.state.client.on('new message', this.recieveMessage);

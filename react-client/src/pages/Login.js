@@ -40,7 +40,7 @@ class Login extends Component{
 		this.setState({loading: true});
 		// axios.defaults.headers.common['x-access-token'] = token;
 
-		axios.post('/user/login', data)
+		axios.post('/api/login', data)
 			.then((data)=>{
 				var response = data.data;
 				auth.authenticateUser(response.token)

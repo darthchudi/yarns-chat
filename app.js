@@ -7,8 +7,8 @@ var flash = require('connect-flash');
 var session = require('express-session');
 var passport = require('./api/services/AuthService');
 var router = require('./routes/router');
-
 var app = express();
+require('dotenv').config();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,19 +18,17 @@ app.set('view engine', 'hbs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public')));
-
 
 //Mongoose Connection
 // mongoose.connect("mongodb://localhost:27017/chat");
-mongoose.connect("mongodb://chudi:infinitywarwasmad@ds117868.mlab.com:17868/chat")
+mongoose.connect(process.env.DB_CONNECTION);
 mongoose.promise = global.Promise;
 mongoose.connection.on('error', (err)=>{
 	console.log(err.message);
 });
 
 app.use(session({
-	secret: "infinitywarwascrazy",
+	secret: process.env.SESSION_SECRET,
 	resave: false,
 	saveUninitialized: true
 }));
@@ -49,20 +47,20 @@ app.use(function(req, res, next){
 });
 
 //Mount Routes
-app.use('/user', router);
+app.use('/api', router);
 
+//Serve Files
 if(process.env.NODE_ENV === 'production'){
 	app.use(express.static('react-client/build'));
+	app.get('*', (req, res)=>{
+		res.sendFile(path.join(__dirname, 'react-client', 'build', 'index.html'));
+	})
 } else{
-	app.use(express.static('react-client/build'));
+	app.use(express.static('react-client'));
+	app.get('*', (req, res)=>{
+		res.sendFile(path.join(__dirname, 'react-client', 'public', 'index.html'));
+	})
 }
-
-app.get('*', (req, res)=>{
-	res.sendFile(path.join(__dirname, 'react-client', 'build', 'index.html'));
-})
-
-
-
 
 // catch 404 errors and forward to error handler
 app.use(function(req, res, next) {
@@ -79,6 +77,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;

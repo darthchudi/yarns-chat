@@ -48,7 +48,7 @@ class SignUp extends Component{
 		
 		this.setState({loading: true});
 
-		axios.post('/user/signup', data)
+		axios.post('/api/signup', data)
 			.then((data)=>{
 				var response = data.data;
 				var newUser = response.user;
