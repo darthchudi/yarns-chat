@@ -17,7 +17,6 @@ class App extends Component {
 		this.updateMessages = this.updateMessages.bind(this);
 		this.recieveMessage = this.recieveMessage.bind(this);
 		this.handleNotification = this.handleNotification.bind(this);
-		this.scrollDiv = this.scrollDiv.bind(this);
 		this.logout = this.logout.bind(this);
 		this.state = {
 			messages: [],
@@ -66,7 +65,6 @@ class App extends Component {
 		var messages = this.state.messages;
 		messages.push(message);
 		this.setState({messages});
-		this.scrollDiv();
 	}
 
 	recieveMessage(message){
@@ -74,7 +72,6 @@ class App extends Component {
 		var messages = this.state.messages;
 		messages.push(message);
 		this.setState({messages});
-		this.scrollDiv();
 	}
 
 	logout(e){
@@ -107,11 +104,6 @@ class App extends Component {
 		}, 1000);
 	}
 
-	scrollDiv(){
-		var messagesContainer = document.getElementById('messagesContainer');
-		messagesContainer.scrollTop = messagesContainer.scrollHeight;
-	}
-
 	render() {
 		if(!auth.isUserAuthenticated()){
 			return <Redirect to="/login" />
@@ -124,7 +116,7 @@ class App extends Component {
 		if(this.state.loaded){
 			return (
 				<div id="messagesContainer">
-					<MenuBar logout={this.logout} username={this.state.user.username}/>
+					<MenuBar logout={this.logout} username={this.state.user.username} onlineUsers={this.state.onlineUsers}/>
 
 					<main className="mt-3">
 
