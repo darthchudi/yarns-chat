@@ -58,7 +58,7 @@ router.post('/login', (req, res, next)=>{
 	})(req, res, next);
 });
 
-router.get('/get', userController.getUser);
+router.get('/get/user', userController.getUser);
 
 
 module.exports = router;

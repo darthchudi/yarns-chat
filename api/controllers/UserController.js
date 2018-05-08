@@ -1,5 +1,6 @@
 var User = require('../models/User');
 var jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 module.exports = {
 	getUser: function(req, res){
@@ -11,7 +12,7 @@ module.exports = {
 			});
 		}
 
-		jwt.verify(token, 'infinitywarwasmad', (err, decoded)=>{
+		jwt.verify(token, process.env.TOKEN_SECRET, (err, decoded)=>{
 			User.findById(decoded.id, async (err, user)=>{
 				if(err){
 					return res.status(500).json({

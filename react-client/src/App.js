@@ -32,7 +32,7 @@ class App extends Component {
 
 	componentDidMount(){
 		axios.defaults.headers.common['x-access-token'] = auth.getToken();
-		axios.get('/api/get')
+		axios.get('/api/get/user')
 			.then((data)=>{
 				var response = data.data;
 				this.setState({user: response.user});
