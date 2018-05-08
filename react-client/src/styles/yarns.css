@@ -77,7 +77,15 @@ a.github:hover{
 	color: white;
 }
 
-h5{
-	font-size: 20px;
-	border-bottom: 4px solid whitesmoke;
+h5.card-title{
+	font-family: Montserrat;
+	font-size: 17px;
+}
+
+.card-text{
+	border-left: 5px solid #efe1e1;
+}
+
+textarea{
+	height: 70%;
 }

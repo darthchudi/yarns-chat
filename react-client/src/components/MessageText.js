@@ -32,7 +32,7 @@ class MessageText extends Component{
 					<form onSubmit={this.sendMessage}>
 						<div className="form-row mb-2">
 							<div className="col-sm-8 col-md-10 mb-2">
-								<input type="text" className="form-control" placeholder="New Message..." name="message" onChange={this.handleChange} value={this.state.message} />
+								<input type="text" className="form-control" placeholder="New Message..." name="message" onChange={this.handleChange} value={this.state.message} autoComplete="off"/>
 							</div>
 
 							<div className="col-sm-2 col-md-2">

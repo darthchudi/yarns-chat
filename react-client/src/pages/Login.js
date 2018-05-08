@@ -9,11 +9,13 @@ class Login extends Component{
 		super(props);
 		this.submit = this.submit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.isFormComplete = this.isFormComplete.bind(this);
 		this.state = {
 			loading: false,
 			username: '',
 			password: '',
 			token: '',
+			invalid: false,
 			successMessage: ''
 		}
 	}
@@ -22,8 +24,11 @@ class Login extends Component{
 		this.setState({[e.target.name]: e.target.value});
 	}
 
-	componentDidMount(){
-
+	isFormComplete(){
+		if(this.state.username ==='' || this.state.password === ''){
+			return true;
+		}
+		return false;
 	}
 
 	submit(e){
@@ -43,7 +48,12 @@ class Login extends Component{
 				this.setState({loading: false});
 			})
 			.catch((e)=>{
-				console.log(e);
+				var error = e.response;
+
+				if(error.status===401){
+					this.setState({invalid: true});
+				}
+				console.log(error);
 			});
 
 	}
@@ -70,23 +80,36 @@ class Login extends Component{
 												<div className="input-group-prepend">
 													<span className="input-group-text" id="inputGroupPrepend">@</span>
 												</div>
-												<input type="text" className="form-control" placeholder="Username" id="username" aria-describedby="inputGroupPrepend" name="username" onChange={this.handleChange} required/>
+												<input type="text" className={`form-control ${this.state.invalid ? 'is-invalid' : ''} `} placeholder="Username" id="username" aria-describedby="inputGroupPrepend" name="username" onChange={this.handleChange}/>
+												{
+													this.state.invalid ? (
+														<div className="invalid-feedback">
+															Invalid username or password	
+														</div>
+													) : ''
+												}
+
 											</div>
 										</div>	
 									</div>
 
 									<div className="form-row">
 										<div className="col form-group">
-											<div className="form-group">
-												<label htmlFor="username">Password</label>
-												<input type="password" className="form-control" placeholder="Password" name="password" onChange={this.handleChange}  required/>
-											</div>
+											<label htmlFor="username">Password</label>
+											<input type="password" className={`form-control ${this.state.invalid ? 'is-invalid' : ''} `} placeholder="Password" name="password" onChange={this.handleChange}/>
+											{
+												this.state.invalid ? (
+													<div className="invalid-feedback">
+														Invalid username or password	
+													</div>
+												) : ''
+											}
 										</div>	
 									</div>
 
 									<div className="form-row">
 										<div className="col">
-											<input type="submit" className="btn btn-purple w-100" value="Login!" onClick={this.submit} />
+											<input type="submit" className="btn btn-purple w-100" value="Login!" onClick={this.submit} disabled={this.isFormComplete()}/>
 										</div>
 									</div>
 									<small className="form-text prompt pt-2">
