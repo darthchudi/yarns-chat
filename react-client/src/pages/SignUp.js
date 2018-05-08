@@ -9,6 +9,7 @@ class SignUp extends Component{
 		super(props);
 		this.submit = this.submit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
+		this.isFormComplete = this.isFormComplete.bind(this);
 		this.state = {
 			loading: false,
 			firstname: '',
@@ -16,16 +17,24 @@ class SignUp extends Component{
 			username: '',
 			password: '',
 			token: '',
+			usernameTaken: false,
 			successMessage: ''
 		}
 	}
 
 	handleChange(e){
 		this.setState({[e.target.name]: e.target.value});
+
+		if(this.state.usernameTaken && e.target.name==='username'){
+			this.setState({usernameTaken: false});
+		}
 	}
 
-	componentDidMount(){
-		
+	isFormComplete(){
+		if(this.state.firstname === '' || this.state.lastname === '' || this.state.username ==='' || this.state.password === ''){
+			return true;
+		}
+		return false;
 	}
 
 	submit(e){
@@ -48,7 +57,11 @@ class SignUp extends Component{
 				this.setState({loading: false});
 			})
 			.catch((e)=>{
-				console.log(e);
+				var error = e.response;
+				if(error.status===401){
+					this.setState({usernameTaken: true});
+				}
+				console.log(error);
 			});
 	}
 
@@ -72,12 +85,12 @@ class SignUp extends Component{
 									<div className="form-row pt-3" id="names">
 										<div className="col col-sm-6 form-group">
 											<label htmlFor="firstname">First Name</label>
-											<input type="text" className="form-control" placeholder="First Name" id="firstname" required name="firstname" onChange={this.handleChange}/> 
+											<input type="text" className="form-control" placeholder="First Name" id="firstname" name="firstname" onChange={this.handleChange}/> 
 										</div>
 
 										<div className="col col-sm-6 form-group">
 											<label htmlFor="lastname">Last Name</label>
-											<input type="text" className="form-control" placeholder="Last Name" id="lastname" required name="lastname" onChange={this.handleChange}/>
+											<input type="text" className="form-control" placeholder="Last Name" id="lastname" name="lastname" onChange={this.handleChange}/>
 										</div>
 									</div>
 
@@ -88,7 +101,14 @@ class SignUp extends Component{
 												<div className="input-group-prepend">
 													<span className="input-group-text" id="inputGroupPrepend">@</span>
 												</div>
-												<input type="text" className="form-control" placeholder="Username" id="username" aria-describedby="inputGroupPrepend" required name="username" onChange={this.handleChange}/>
+												<input type="text" className={`form-control ${this.state.usernameTaken ? 'is-invalid' : ''}`} placeholder="Username" id="username" aria-describedby="inputGroupPrepend" name="username" onChange={this.handleChange}/>
+												{
+													this.state.usernameTaken ? (
+														<div className="invalid-feedback">
+															Sorry, that username is taken.	
+														</div>
+													) : ''
+												}
 											</div>
 										</div>	
 									</div>
@@ -97,17 +117,14 @@ class SignUp extends Component{
 										<div className="col form-group">
 											<div className="form-group">
 												<label htmlFor="username">Password</label>
-												<input type="password" className="form-control" placeholder="Password" required name="password" onChange={this.handleChange} />
-												<small className="form-text">
-													Your password may be 4-20 characters long
-												</small>
+												<input type="password" className="form-control" placeholder="Password" name="password" onChange={this.handleChange} />
 											</div>
 										</div>	
 									</div>
 
 									<div className="form-row">
 										<div className="col">
-											<input type="submit" className="btn btn-purple w-100" value="Sign Up!" onClick={this.submit}/>
+											<input type="submit" className="btn btn-purple w-100" value="Sign Up!" onClick={this.submit} disabled={this.isFormComplete()}/>
 										</div>
 									</div>
 									<small className="form-text prompt pt-2">
