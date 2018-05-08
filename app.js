@@ -53,12 +53,12 @@ app.use('/user', router);
 
 if(process.env.NODE_ENV === 'production'){
 	app.use(express.static('react-client/build'));
+} else{
+	app.use(express.static('react-client/build'));
 }
 
-app.use(express.static('react-client/build'));
-
 app.get('*', (req, res)=>{
-	res.sendFile('/react-client/build/index.html');
+	res.sendFile(path.join(__dirname, 'react-client', 'build', 'index.html'));
 })
 
 
