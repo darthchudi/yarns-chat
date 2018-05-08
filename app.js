@@ -18,7 +18,7 @@ app.set('view engine', 'hbs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
 
 
 //Mongoose Connection
@@ -49,9 +49,14 @@ app.use(function(req, res, next){
 
 //Mount Routes
 app.use('/user', router);
-app.use('*', (req, res)=>{
-	res.sendFile(path.join(__dirname, 'react-client/public/index.html'));
-})
+
+if(process.env.NODE_ENV === 'production'){
+	app.use(express.static('react-client/build'));
+}
+
+app.use(express.static('react-client/public'));
+
+
 
 
 // catch 404 errors and forward to error handler
