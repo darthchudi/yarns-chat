@@ -22,7 +22,8 @@ app.use(cookieParser());
 
 
 //Mongoose Connection
-mongoose.connect("mongodb://localhost:27017/chat");
+// mongoose.connect("mongodb://localhost:27017/chat");
+mongoose.connect("mongodb://chudi:infinitywarwasmad@ds117868.mlab.com:17868/chat")
 mongoose.promise = global.Promise;
 mongoose.connection.on('error', (err)=>{
 	console.log(err.message);
@@ -54,7 +55,7 @@ if(process.env.NODE_ENV === 'production'){
 	app.use(express.static('react-client/build'));
 }
 
-app.use(express.static('react-client/public'));
+app.use(express.static('react-client/build'));
 
 
 
