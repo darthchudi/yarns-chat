@@ -86,6 +86,10 @@ h5.card-title{
 	border-left: 5px solid #efe1e1;
 }
 
-textarea{
-	height: 70%;
+ul li a{
+	border-bottom: none;
+}
+
+ul li a:hover{
+	border-bottom: none;
 }

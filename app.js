@@ -56,10 +56,10 @@ if(process.env.NODE_ENV === 'production'){
 		res.sendFile(path.join(__dirname, 'react-client', 'build', 'index.html'));
 	})
 } else{
-	app.use(express.static('react-client'));
-	app.get('*', (req, res)=>{
-		res.sendFile(path.join(__dirname, 'react-client', 'public', 'index.html'));
-	})
+	// app.use(express.static('react-client'));
+	// app.get('*', (req, res)=>{
+	// 	res.sendFile(path.join(__dirname, 'react-client', 'public', 'index.html'));
+	// })
 }
 
 // catch 404 errors and forward to error handler

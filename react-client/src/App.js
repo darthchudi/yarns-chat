@@ -7,7 +7,6 @@ import MessageText from './components/MessageText';
 import MenuBar from './components/MenuBar';
 import Notifications from './components/Notifications';
 import MessagesContainer from './components/MessagesContainer';
-// import OnlineUsers from './components/OnlineUsers';
 import Auth from './helpers/auth';
 const auth = new Auth();
 
@@ -52,7 +51,7 @@ class App extends Component {
 				});
 			})
 			.catch((e)=>{
-				console.log(e);
+				// console.log(e);
 			})
 	}
 
@@ -83,7 +82,6 @@ class App extends Component {
 	}
 	
 	handleNotification(notification){
-
 		var onlineUsers = notification.onlineUsers;
 		var index = onlineUsers.indexOf(this.state.user.username);
 		onlineUsers.splice(index, 1);
@@ -121,7 +119,7 @@ class App extends Component {
 
 					<main className="mt-3">
 
-						<div className="row" id="main">
+						<div className="row">
 							<div className="col-sm-8 col-md-10" id="messages">
 								<MessagesContainer messages={this.state.messages}/>
 							</div>

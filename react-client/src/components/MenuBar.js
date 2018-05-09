@@ -41,18 +41,14 @@ const menuBar =  (props) => {
 							{onlineBarMessage}
 						</a>
 						<div className="dropdown-menu ml-md-3" aria-labelledby="onlineUsersDropdown">
-							<span href="" className="dropdown-item d-flex justify-content-between align-items-center">
-								Chudi
-								<span className="badge badge-success badge-pill">online</span>
-							</span>
-							<span href="" className="dropdown-item d-flex justify-content-between align-items-center">
-								Frank
-								<span className="badge badge-success badge-pill">online</span>
-							</span>
-							<span href="" className="dropdown-item d-flex justify-content-between align-items-center">
-								Tony
-								<span className="badge badge-success badge-pill">online</span>
-							</span>
+							{props.onlineUsers.map((user, key)=>(
+								<span href="" className="dropdown-item d-flex justify-content-between align-items-center" key={key}>
+									{user}
+									<span className="badge badge-success badge-pill">online</span>
+								</span>
+								
+								
+							))}
 						</div>
 					</li>
 				</ul>

@@ -61,7 +61,7 @@ class SignUp extends Component{
 				if(error.status===401){
 					this.setState({usernameTaken: true});
 				}
-				console.log(error);
+				// console.log(error);
 			});
 	}
 

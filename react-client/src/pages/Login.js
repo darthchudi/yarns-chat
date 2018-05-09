@@ -44,7 +44,7 @@ class Login extends Component{
 			.then((data)=>{
 				var response = data.data;
 				auth.authenticateUser(response.token)
-				console.log(`Successfully logged ${response.user.username}`);
+				// console.log(`Successfully logged ${response.user.username}`);
 				this.setState({loading: false});
 			})
 			.catch((e)=>{
@@ -53,7 +53,7 @@ class Login extends Component{
 				if(error.status===401){
 					this.setState({invalid: true});
 				}
-				console.log(error);
+				// console.log(error);
 			});
 
 	}
